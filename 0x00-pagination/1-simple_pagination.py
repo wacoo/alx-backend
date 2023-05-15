@@ -18,6 +18,7 @@ import csv
 import math
 from typing import List, Tuple
 
+
 class Server:
     """Server class to paginate a database of popular baby names.
     """
@@ -38,13 +39,20 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-        assert page >= 0 or page_size >= 0, 'AssertionError raised with negative values'
-        assert page == 0 or page_size == 0, 'AssertionError raised with 0'
-        assert type(page) == int or type(page_size) == int, 'AssertionError raised\
-                                when page and/or page_size are not ints'
+        ''' given start and end index of a page return
+            data in the page
+        '''
+        assert page >= 0 or page_size >= 0, '\
+                AssertionError raised with negative values'
+        assert page != 0 or page_size != 0, '\
+                AssertionError raised with 0'
+        assert type(page) == int, '\
+                AssertionError raised when page and/or page_size are not ints'
+        assert type(page_size) == int, '\
+                AssertionError raised when page and/or page_size are not ints'
+        start, end = index_range(page, page_size)
         self.dataset()
-        data = index_range(page, page_size)
-        return self.__dataset[data[0], data[1]]
+        return self.__dataset[start:end]
 
 
 def index_range(page: int, page_size: int) -> Tuple[int]:
@@ -56,5 +64,3 @@ def index_range(page: int, page_size: int) -> Tuple[int]:
             start = end
             end = start + page_size
     return (start, end)
-
-
