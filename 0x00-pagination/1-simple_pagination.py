@@ -57,6 +57,6 @@ class Server:
 
 def index_range(page: int, page_size: int) -> Tuple[int]:
     ''' return a tuple of start and end index of the last page '''
-    start = page_size * (page - 1)
-    end  = page * page_size
+    start: int = page_size * (page - 1)
+    end: int = start + page_size
     return (start, end)
