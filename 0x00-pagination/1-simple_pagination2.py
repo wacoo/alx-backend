@@ -42,9 +42,14 @@ class Server:
         ''' given start and end index of a page return
             data in the page
         '''
-        assert isinstance(page, int) and page > 0
-        assert isinstance(page_size, int) and page_size > 0
-
+        assert page >= 0 or page_size >= 0, '\
+                AssertionError raised with negative values'
+        assert page != 0 or page_size != 0, '\
+                AssertionError raised with 0'
+        assert type(page) == int, '\
+                AssertionError raised when page and/or page_size are not ints'
+        assert type(page_size) == int, '\
+                AssertionError raised when page and/or page_size are not ints'
         start, end = index_range(page, page_size)
         self.dataset()
         return self.__dataset[start:end]
@@ -52,10 +57,6 @@ class Server:
 
 def index_range(page: int, page_size: int) -> Tuple[int]:
     ''' return a tuple of start and end index of the last page '''
-    start = 0
-    end = start + page_size
-    for i in range(page):
-        if i > 0:
-            start = end
-            end = start + page_size
+    start: int = page_size * (page - 1)
+    end: int = start + page_size
     return (start, end)
