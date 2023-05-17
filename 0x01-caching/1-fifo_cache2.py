@@ -22,7 +22,7 @@ class FIFOCache(BaseCaching):
                 if key not in self.cache_data:
                     self.cache_data.pop(key_pop)
                     self.cache_order.pop(min_key)
-                    '''self.count -= 1'''
+                    self.count -= 1
                     print('DISCARD: {}'. format(key_pop))
 
             self.cache_data[key] = item
