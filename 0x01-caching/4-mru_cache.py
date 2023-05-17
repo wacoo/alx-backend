@@ -16,7 +16,7 @@ class MRUCache(BaseCaching):
 
     def put(self, key, item):
         ''' saves cache based on LRU algorithm '''
-        if key is not None or item is not None:
+        if key is not None and item is not None:
             mr_key = 0
             if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
                 if key not in self.cache_data:

@@ -13,18 +13,19 @@ class LFUCache(BaseCaching):
 
     def put(self, key, item):
         ''' saves cache in LFU order '''
-        if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
-            key_pop = min(self.cache_order, key=self.cache_order.get)
-            if key not in self.cache_data:
-                self.cache_data.pop(key_pop)
-                self.cache_order.pop(key_pop)
-                print('DISCARD: {}'.format(key_pop))
+        if key is not None and item is not None:
+            if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
+                key_pop = min(self.cache_order, key=self.cache_order.get)
+                if key not in self.cache_data:
+                    self.cache_data.pop(key_pop)
+                    self.cache_order.pop(key_pop)
+                    print('DISCARD: {}'.format(key_pop))
 
-        self.cache_data[key] = item
-        if key not in self.cache_order:
-            self.cache_order[key] = 1
-        else:
-            self.cache_order[key] += 1
+            self.cache_data[key] = item
+            if key not in self.cache_order:
+                self.cache_order[key] = 1
+            else:
+                self.cache_order[key] += 1
 
     def get(self, key):
         ''' get cache from self.cache_data with key '''
