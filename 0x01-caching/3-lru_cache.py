@@ -11,8 +11,8 @@ class LRUCache(BaseCaching):
     def __init__(self):
         ''' initializes the LRUCache class '''
         super().__init__()
-        self.lru_key = {}
-        self.count = 0
+        '''self.lru_key = {}
+        self.count = 0 '''
 
     def put(self, key, item):
         ''' saves cache based on LRU algorithm '''
