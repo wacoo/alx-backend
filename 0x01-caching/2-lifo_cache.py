@@ -20,7 +20,7 @@ class LIFOCache(BaseCaching):
             key_pop = self.cache_order[last_key]
             if key not in self.cache_data:
                 self.cache_data.pop(key_pop)
-                self.count -= 1
+                '''self.count -= 1'''
                 self.cache_order.pop(last_key)
                 print('DISCARD: {}'.format(key_pop))
 
