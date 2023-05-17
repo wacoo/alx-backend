@@ -23,9 +23,9 @@ class LIFOCache(BaseCaching):
                 self.cache_order.pop(last_key)
                 print('DISCARD: {}'.format(key_pop))
 
-        self.cache_data[key] = item
-        self.count += 1
-        self.cache_order[self.count] = key
+            self.cache_data[key] = item
+            self.count += 1
+            self.cache_order[self.count] = key
 
     def get(self, key):
         ''' get cache from self.cache_data with key '''

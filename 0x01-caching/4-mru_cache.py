@@ -24,9 +24,9 @@ class MRUCache(BaseCaching):
                     self.mru_key.pop(mr_key)
                     self.cache_data.pop(mr_key)
                     print('DISCARD: {}'.format(mr_key))
-            self.cache_data[key] = item
-            self.count += 1
-            self.mru_key[key] = self.count
+                self.cache_data[key] = item
+                self.count += 1
+                self.mru_key[key] = self.count
 
     def get(self, key):
         ''' return item with given key from self.cache_data '''
