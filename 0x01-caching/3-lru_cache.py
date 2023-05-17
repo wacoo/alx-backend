@@ -2,6 +2,7 @@
 ''' create a class that handles cache storage and
 retrival using LRU algorithm named LRUCache that
 inherits from BaseCaching '''
+from collections import OrderedDict
 BaseCaching = __import__('base_caching').BaseCaching
 
 
@@ -13,6 +14,7 @@ class LRUCache(BaseCaching):
         super().__init__()
         self.lru_key = {}
         self.count = 0
+        self.cache_data = OrderedDict()
 
     def put(self, key, item):
         ''' saves cache based on LRU algorithm '''
@@ -25,6 +27,7 @@ class LRUCache(BaseCaching):
                     self.cache_data.pop(lr_key)
                     print('DISCARD: {}'.format(lr_key))
             self.cache_data[key] = item
+            self.cache_data.move_to_end(key, last=False)
             self.count += 1
             self.lru_key[key] = self.count
 
