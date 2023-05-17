@@ -12,14 +12,12 @@ class FIFOCache(BaseCaching):
         super().__init__()
         self.cache_order = {}
         self.count = 0
-        self.min_key = ''
 
     def put(self, key, item):
         ''' store cache data in FIFO order '''
         if key is not None and item is not None:
             if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
-                order = self.cache_order.keys()
-                min_key = min(order)
+                min_key = min(self.cache_order, key=self.cache_order.get)
                 key_pop = self.cache_order[min_key]
                 if key not in self.cache_data:
                     self.cache_data.pop(key_pop)
