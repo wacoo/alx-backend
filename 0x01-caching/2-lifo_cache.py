@@ -15,7 +15,7 @@ class LIFOCache(BaseCaching):
     def put(self, key, item):
         ''' saves cache in LIFO order '''
         if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
-            last_key = max(self.cache_order, key=self.cache_data.get)
+            last_key = max(self.cache_order, key=self.cache_order.get)
             key_pop = self.cache_order[last_key]
             if key not in self.cache_data:
                 self.cache_data.pop(key_pop)
