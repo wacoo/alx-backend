@@ -14,14 +14,15 @@ class LIFOCache(BaseCaching):
 
     def put(self, key, item):
         ''' saves cache in LIFO order '''
-        if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
-            last_key = max(self.cache_order, key=self.cache_order.get)
-            key_pop = self.cache_order[last_key]
-            if key not in self.cache_data:
-                self.cache_data.pop(key_pop)
-                '''self.count -= 1'''
-                self.cache_order.pop(last_key)
-                print('DISCARD: {}'.format(key_pop))
+        if key is not None and item is not None:
+            if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
+                last_key = max(self.cache_order, key=self.cache_order.get)
+                key_pop = self.cache_order[last_key]
+                if key not in self.cache_data:
+                    self.cache_data.pop(key_pop)
+                    '''self.count -= 1'''
+                    self.cache_order.pop(last_key)
+                    print('DISCARD: {}'.format(key_pop))
 
             self.cache_data[key] = item
             self.count += 1

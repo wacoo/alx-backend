@@ -20,11 +20,11 @@ class LFUCache(BaseCaching):
                 self.cache_order.pop(key_pop)
                 print('DISCARD: {}'.format(key_pop))
 
-            self.cache_data[key] = item
-            if key not in self.cache_order:
-                self.cache_order[key] = 1
-            else:
-                self.cache_order[key] += 1
+        self.cache_data[key] = item
+        if key not in self.cache_order:
+            self.cache_order[key] = 1
+        else:
+            self.cache_order[key] += 1
 
     def get(self, key):
         ''' get cache from self.cache_data with key '''

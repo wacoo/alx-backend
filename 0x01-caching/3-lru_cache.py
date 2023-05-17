@@ -24,9 +24,9 @@ class LRUCache(BaseCaching):
                     self.lru_key.pop(lr_key)
                     self.cache_data.pop(lr_key)
                     print('DISCARD: {}'.format(lr_key))
-                self.cache_data[key] = item
-                self.count += 1
-                self.lru_key[key] = self.count
+            self.cache_data[key] = item
+            self.count += 1
+            self.lru_key[key] = self.count
 
     def get(self, key):
         ''' return item with given key from self.cache_data '''
