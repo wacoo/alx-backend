@@ -13,8 +13,8 @@ class Config:
     BABEL_DEFAULT_LOCALE = 'en'
 
 
-babel = Babel(app)
 app.config.from_object(Config)
+babel = Babel(app)
 
 
 @babel.localeselector
