@@ -2,8 +2,6 @@
 ''' basic flask app used to start a small localization program '''
 from flask import Flask, render_template, request
 from flask_babel import Babel
-from flask_babel import _
-from flask_babel import gettext
 
 app = Flask(__name__)
 
