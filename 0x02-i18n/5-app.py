@@ -2,6 +2,7 @@
 ''' basic flask app used to start a small localization program '''
 from flask import Flask, render_template, request, g
 from flask_babel import Babel
+from typing import Union
 
 app = Flask(__name__)
 
@@ -46,9 +47,9 @@ def before_request() -> None:
     g.user = user
 
 
-def get_user() -> str:
+def get_user() -> Union[str, None]:
     ''' return user data '''
-    id = request.args.get('login_as', None)
+    id = request.args.get('login_as')
     if id:
         return users.get(int(id))
     return None
