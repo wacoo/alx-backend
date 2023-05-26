@@ -2,8 +2,6 @@
 ''' basic flask app used to start a small localization program '''
 from flask import Flask, render_template, request, g
 from flask_babel import Babel
-from flask_babel import _
-from flask_babel import gettext
 
 app = Flask(__name__)
 
@@ -27,7 +25,7 @@ babel = Babel(app)
 
 
 @babel.localeselector
-def get_locale():
+def get_locale() -> str:
     ''' select locale '''
     local = request.args.get('locale')
     if local in app.config['LANGUAGES']:
@@ -42,16 +40,16 @@ def home():
 
 
 @app.before_request
-def before_request():
+def before_request() -> None:
     ''' get user info and assign to g user '''
     user = get_user()
     g.user = user
 
 
-def get_user():
+def get_user() -> str:
     ''' return user data '''
     id = request.args.get('login_as', None)
-    if id is not None and int(id) in users.keys():
+    if id:
         return users.get(int(id))
     return None
 
