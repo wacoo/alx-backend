@@ -3,6 +3,8 @@
 from flask import Flask, render_template, request
 from flask_babel import Babel
 
+app = Flask(__name__)
+
 
 class Config:
     ''' language and timezone configguration class '''
@@ -11,7 +13,6 @@ class Config:
     BABEL_DEFAULT_LOCALE = 'en'
 
 
-app = Flask(__name__)
 app.config.from_object(Config)
 babel = Babel(app)
 
@@ -22,7 +23,7 @@ def get_locale() -> str:
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
-@app.route('/')
+@app.route('/', strict_slashes=False)
 def home() -> str:
     ''' serves 0-index.html '''
     return render_template('3-index.html')
