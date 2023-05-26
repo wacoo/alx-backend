@@ -24,7 +24,7 @@ def get_locale() -> str:
 
 
 @app.route('/', strict_slashes=False)
-def home() -> str:
+def home():
     ''' serves 0-index.html '''
     return render_template('3-index.html')
 
