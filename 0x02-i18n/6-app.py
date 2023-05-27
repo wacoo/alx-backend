@@ -28,17 +28,15 @@ babel = Babel(app)
 @babel.localeselector
 def get_locale() -> str:
     ''' select locale '''
-    local1 = request.args.get('locale', '')
-    cfg = app.config['LANGUAGES']
-
-    if local1 in cfg:
-        return local1
-    local2 = g.user['locale']
-    if g.user and local2 in cfg:
-        return local2
-    local3 = request.headers.get('locale', '')
-    if local3 in cfg:
-        return local3
+    locale = request.args.get('locale', '')
+    cfg = app.config["LANGUAGES"]
+    if locale in cfg:
+        return locale
+    if g.user and g.user['locale'] in cfg:
+        return g.user['locale']
+    header_locale = request.headers.get('locale', '')
+    if header_locale in cfg:
+        return header_locale
     return request.accept_languages.best_match(cfg)
 
 
