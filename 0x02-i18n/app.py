@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 ''' basic flask app used to start a small localization program '''
 import pytz
+import locale
 from flask import Flask, render_template, request, g
-from flask_babel import Babel
+from flask_babel import Babel, format_datetime
 from typing import Union
 from pytz import timezone
+from datetime import datetime
+import pytz.exceptions
 
 app = Flask(__name__)
 
@@ -46,6 +49,7 @@ def get_locale() -> str:
 @babel.timezoneselector
 def get_timezone() -> Union[str, None]:
     ''' returns timezone '''
+    default = app.config["BABEL_DEFAULT_TIMEZONE"]
     try:
         tz = request.args.get('timezone', '')
         if tz:
@@ -54,9 +58,9 @@ def get_timezone() -> Union[str, None]:
         if g.user and g.user['timezone']:
             timez = pytz.timezone(g.user['timezone'])
             return timez.zone
-        return 'UTC'
+        return default
     except pytz.exceptions.UnknownTimeZoneError:
-        return 'UTC'
+        return default
 
 
 @app.route('/', strict_slashes=False)
@@ -70,6 +74,11 @@ def before_request() -> None:
     ''' get user info and assign to g user '''
     user = get_user()
     g.user = user
+    current_time = pytz.utc.localize(datetime.utcnow())
+    time = current_time.astimezone(timezone(get_timezone()))
+    locale.setlocale(locale.LC_TIME, (get_locale(), 'UTF-8'))
+    format = '%b %d, %Y %I:%M:%S %p'
+    g.time = time.strftime(format)
 
 
 def get_user() -> Union[str, None]:
