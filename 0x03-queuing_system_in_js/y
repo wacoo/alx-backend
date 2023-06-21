@@ -1,0 +1,27 @@
+import redis from 'redis';
+
+const client = redis.createClient();
+
+client.on('error', err => console.log(`Redis client not connected to the server: ${err}`));
+
+client.on('connect', () => {
+  console.log('Redis client connected to the server');
+});
+
+function publishMessage(message, time) {
+  promise = new Promise((resolve, reject) => {
+    resolve();
+    reject();
+  });
+  promise.then (
+    function  (value) {
+      setTimeout(`About to send ${message}`, time);
+      client.hset('holberton school channel', message, time);
+    }
+    function (error) {
+      console.log('Error:x');
+    }
+  );
+}
+
+subscribe();
