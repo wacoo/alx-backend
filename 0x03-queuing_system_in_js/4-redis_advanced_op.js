@@ -3,14 +3,14 @@ import redis from 'redis';
 
 const client = redis.createClient();
 
-const hash =  {
-  'Portland': 50,
-  'Seattle': 80,
+const hash = {
+  Portland: 50,
+  Seattle: 80,
   'New York': 20,
-  'Bogota': 20,
-  'Cali': 40,
-  'Paris': 2,
-}
+  Bogota: 20,
+  Cali: 40,
+  Paris: 2,
+};
 
 function storeHash() {
   for (const [key, val] of Object.entries(hash)) {
@@ -19,12 +19,10 @@ function storeHash() {
 }
 
 async function printHash() {
-  const value =  await client.hgetall('HolbertonSchools', (err, res) => {
+  await client.hgetall('HolbertonSchools', (err, res) => {
     console.log(res);
   });
 }
 
 storeHash();
 printHash();
-
-

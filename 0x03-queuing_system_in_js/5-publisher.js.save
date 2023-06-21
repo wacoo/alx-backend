@@ -1,4 +1,3 @@
-#!/usr/bin/yarn dev
 /*import redis from 'redis';
 
 const client = redis.createClient();
@@ -25,6 +24,7 @@ publishMessage('Holberton Student #2 starts course', 200);
 publishMessage('KILL_SERVER', 300);
 publishMessage('Holberton Student #3 starts course', 400);
 */
+
 import { createClient } from 'redis';
 
 const client = createClient();
